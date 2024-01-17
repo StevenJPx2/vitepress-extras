@@ -1,5 +1,3 @@
-import path from "node:path";
-import url from "node:url";
 import fs from "fast-glob";
 import { join, resolve, sep } from "pathe";
 import { capitalize } from "string-ts";
@@ -32,12 +30,7 @@ export const generateSidebar = (
     leafFile = "index",
     depth = Number.POSITIVE_INFINITY,
   } = options;
-  const pathString = resolve(
-    path.dirname(url.fileURLToPath(import.meta.url)),
-    "..",
-    "..",
-    rootPath,
-  );
+  const pathString = resolve(rootPath);
 
   const sidebar: DefaultTheme.SidebarItem[] = [];
   const files = fs
@@ -68,6 +61,8 @@ export const generateSidebar = (
       return transformName(nameNormalized, path);
     };
 
+    // TODO: refactor this to use a for loop
+    // eslint-disable-next-line unicorn/no-array-reduce
     return parentPath.reduceRight((acc, curr, index, arr) => {
       if (index === arr.length - 1) {
         if (name === leafFile) {
@@ -119,8 +114,6 @@ export const generateSidebar = (
       sidebar.push(tmpFile);
     }
   }
-
-  console.log(JSON.stringify(sidebar, undefined, 2), { options });
 
   return sidebar;
 };
