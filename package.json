@@ -1,0 +1,58 @@
+{
+  "name": "vitepress-extras",
+  "version": "0.0.0",
+  "repository": "StevenJPx2/vitepress-extras",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^11.0.2",
+    "@types/node": "^20.10.5",
+    "@vitest/coverage-v8": "^1.1.0",
+    "changelogen": "^0.5.5",
+    "eslint": "^8.56.0",
+    "eslint-config-unjs": "^0.2.1",
+    "jiti": "^1.21.0",
+    "prettier": "^3.1.1",
+    "size-limit": "^11.0.2",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0",
+    "untyped": "^1.4.0",
+    "vitepress": "^1.0.0-rc.39",
+    "vitest": "^1.1.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "description": "",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "unbuild",
+    "size": "size-limit",
+    "dev": "vitest dev",
+    "play": "jiti playground",
+    "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src test",
+    "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
+    "prepack": "bun run build",
+    "release": "bun run test && changelogen --release && npm publish && git push --follow-tags",
+    "test": "bun run lint && bun run test:types && vitest run --coverage",
+    "test:types": "tsc --noEmit --skipLibCheck"
+  },
+  "sideEffects": false,
+  "size-limit": [
+    {
+      "path": "dist/index.mjs"
+    }
+  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "string-ts": "^2.0.0"
+  }
+}
