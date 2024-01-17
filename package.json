@@ -1,6 +1,6 @@
 {
   "name": "vitepress-extras",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "repository": "StevenJPx2/vitepress-extras",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
