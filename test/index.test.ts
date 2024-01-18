@@ -3,7 +3,7 @@ import { generateSidebar } from "../src";
 
 describe("vitepress-extras", () => {
   it("no options", () => {
-    expect(generateSidebar("test")).toStrictEqual([
+    expect(generateSidebar({ rootPath: "test" })).toStrictEqual([
       {
         text: "docs-test",
         link: "docs-test/",
@@ -31,7 +31,9 @@ describe("vitepress-extras", () => {
   });
 
   it("README as leaf", () => {
-    expect(generateSidebar("test", { leafFile: "README" })).toStrictEqual([
+    expect(
+      generateSidebar({ rootPath: "test", leafFile: "README" }),
+    ).toStrictEqual([
       {
         text: "docs-test",
         items: [
@@ -56,7 +58,9 @@ describe("vitepress-extras", () => {
   });
 
   it("leading path", () => {
-    expect(generateSidebar("test", { leadingPath: "root/" })).toStrictEqual([
+    expect(
+      generateSidebar({ rootPath: "test", leadingPath: "root/" }),
+    ).toStrictEqual([
       {
         text: "docs-test",
         link: "root/docs-test/",
@@ -83,8 +87,36 @@ describe("vitepress-extras", () => {
     ]);
   });
 
+  it("content path", () => {
+    expect(
+      generateSidebar({
+        rootPath: "test/docs-test",
+        contentPath: "/guide",
+        leadingPath: "docs-test/",
+      }),
+    ).toStrictEqual([
+      {
+        text: "guide",
+        items: [
+          {
+            text: "get-started",
+            link: "docs-test/guide/1.get-started",
+          },
+          {
+            text: "development",
+            link: "docs-test/guide/2.development",
+          },
+          {
+            text: "README",
+            link: "docs-test/guide/README",
+          },
+        ],
+      },
+    ]);
+  });
+
   it("depth to be 2", () => {
-    expect(generateSidebar("test", { depth: 2 })).toStrictEqual([
+    expect(generateSidebar({ rootPath: "test", depth: 2 })).toStrictEqual([
       {
         text: "docs-test",
         link: "docs-test/",

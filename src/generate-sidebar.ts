@@ -4,45 +4,74 @@ import { capitalize } from "string-ts";
 import { withoutLeadingSlash, withoutTrailingSlash } from "ufo";
 import { type DefaultTheme } from "vitepress";
 
-/** Generates a sidebar for vitepress based on the files in the rootPath
- * @param rootPath The path to the folder containing the files
- * @param options Options for the sidebar generation
+const withoutLeadingAndTrailingSlash = (path: string) =>
+  withoutLeadingSlash(withoutTrailingSlash(path));
+
+/**
+ * Generates a sidebar for vitepress based on the files in the rootPath
  */
-export const generateSidebar = (
-  rootPath: string,
-  options: {
-    /** The path to prepend for the url */
-    leadingPath?: string;
-    /** The name of the file you want to end it at */
-    leafFile?: string;
-    /** A function to transform the name of the file */
-    transformName?: (fileName: string, filePath: string) => string;
-    /** A function to transform the path of the file */
-    transformPath?: (filePath: string, fileName: string) => string;
-    /** The depth to search for files */
-    depth?: number;
-  } = {},
-): DefaultTheme.SidebarItem[] => {
+export const generateSidebar = (options: {
+  /**
+   * The path to the folder containing the files
+   */
+  rootPath: string;
+  /**
+   * The path to generate the sidebar for
+   * @default "."
+   */
+  contentPath?: string;
+  /**
+   * The path to prepend for the url
+   * @default ""
+   */
+  leadingPath?: string;
+  /**
+   * The name of the file you want to end it at
+   * @default "index"
+   */
+  leafFile?: string;
+  /**
+   * A function to transform the name of the file
+   * @default (val) => val
+   */
+  transformName?: (fileName: string, filePath: string) => string;
+  /**
+   * A function to transform the path of the file
+   * @default (path, name) => join(path, name)
+   */
+  transformPath?: (filePath: string, fileName: string) => string;
+  /**
+   * The depth to search for files
+   * @default Number.POSITIVE_INFINITY
+   */
+  depth?: number;
+}): DefaultTheme.SidebarItem[] => {
   const {
+    rootPath,
+    contentPath = ".",
     leadingPath = "",
     transformName = (val) => val,
     transformPath = (path, name) => join(path, name),
     leafFile = "index",
     depth = Number.POSITIVE_INFINITY,
   } = options;
-  const pathString = resolve(rootPath);
+
+  const normalizedContentPath = withoutLeadingAndTrailingSlash(contentPath);
 
   const sidebar: DefaultTheme.SidebarItem[] = [];
   const files = fs
-    .globSync("*.md", {
-      cwd: pathString,
+    .globSync(`${normalizedContentPath}/**/*.md`, {
+      cwd: resolve(rootPath),
       deep: depth,
       objectMode: true,
       baseNameMatch: true,
     })
     .map((val) => ({
       name: val.name.replace(".md", ""),
-      path: withoutTrailingSlash(val.path).split(sep).slice(0, -1).join(sep),
+      path: withoutLeadingAndTrailingSlash(val.path)
+        .split(sep)
+        .slice(0, -1)
+        .join(sep),
     }))
     .sort((a, b) => a.name.localeCompare(b.name))
     .sort(
@@ -54,11 +83,11 @@ export const generateSidebar = (
     const parentPath = path.split(sep);
     const parentName =
       parentPath.at(-1) ||
-      capitalize(withoutLeadingSlash(withoutTrailingSlash(leadingPath)));
+      capitalize(withoutLeadingAndTrailingSlash(leadingPath));
 
-    const transformNameNormalized = (name: string) => {
-      const nameNormalized = name.replace(/^\d+\./g, "").trim();
-      return transformName(nameNormalized, path);
+    const transformNormalizedName = (name: string) => {
+      const normalizedName = name.replace(/^\d+\./g, "").trim();
+      return transformName(normalizedName, path);
     };
 
     // TODO: refactor this to use a for loop
@@ -67,23 +96,23 @@ export const generateSidebar = (
       if (index === arr.length - 1) {
         if (name === leafFile) {
           return {
-            text: transformNameNormalized(parentName),
+            text: transformNormalizedName(parentName),
             link: join(leadingPath, transformPath(path, ""), sep),
             items: [],
           };
         }
         return {
-          text: transformNameNormalized(parentName),
+          text: transformNormalizedName(parentName),
           items: [
             {
-              text: transformNameNormalized(name),
+              text: transformNormalizedName(name),
               link: join(leadingPath, transformPath(path, name)),
             },
           ],
         };
       }
 
-      return { text: transformNameNormalized(curr), items: [acc] };
+      return { text: transformNormalizedName(curr), items: [acc] };
     }, {} as DefaultTheme.SidebarItem);
   });
 
