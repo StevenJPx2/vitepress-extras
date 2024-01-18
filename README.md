@@ -63,7 +63,7 @@ Published under [MIT License](./LICENSE).
 [npm-version-href]: https://npmjs.com/package/vitepress-extras
 [npm-downloads-src]: https://img.shields.io/npm/dm/vitepress-extras?style=flat&colorA=18181B&colorB=F0DB4F
 [npm-downloads-href]: https://npmjs.com/package/vitepress-extras
-[codecov-src]: https://img.shields.io/codecov/c/gh/unjs/vitepress-extras/main?style=flat&colorA=18181B&colorB=F0DB4F
-[codecov-href]: https://codecov.io/gh/unjs/vitepress-extras
+[codecov-src]: https://img.shields.io/codecov/c/gh/StevenJPx2/vitepress-extras/main?style=flat&colorA=18181B&colorB=F0DB4F
+[codecov-href]: https://codecov.io/gh/StevenJPx2/vitepress-extras
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/vitepress-extras?style=flat&colorA=18181B&colorB=F0DB4F
 [bundle-href]: https://bundlephobia.com/result?p=vitepress-extras
