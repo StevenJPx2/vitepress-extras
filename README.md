@@ -5,7 +5,7 @@
 [![bundle][bundle-src]][bundle-href]
 [![Codecov][codecov-src]][codecov-href]
 
-This is my package description.
+Useful extras for Vitepress.
 
 ## Usage
 
@@ -41,7 +41,7 @@ const { generateSidebars } = require("vitepress-extras");
 
 ## Roadmap
 
-- [ ] Tests
+- [x] Tests
 
 ## Development
 
