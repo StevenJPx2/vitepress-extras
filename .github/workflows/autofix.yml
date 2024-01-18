@@ -14,10 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: corepack enable
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: "bun"
+      - uses: oven-sh/setup-bun@v1
       - run: bun i
       - name: Fix lint issues
         run: bun run lint:fix
