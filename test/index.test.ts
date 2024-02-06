@@ -124,4 +124,33 @@ describe("vitepress-extras", () => {
       },
     ]);
   });
+
+  it("no ignore list", () => {
+    expect(generateSidebar({ rootPath: "test", ignore: [] })).toStrictEqual([
+      {
+        text: "docs-test",
+        link: "docs-test/",
+        items: [
+          { link: "docs-test/_ignore", text: "_ignore" },
+          {
+            text: "guide",
+            items: [
+              {
+                text: "get-started",
+                link: "docs-test/guide/1.get-started",
+              },
+              {
+                text: "development",
+                link: "docs-test/guide/2.development",
+              },
+              {
+                text: "README",
+                link: "docs-test/guide/README",
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+  });
 });

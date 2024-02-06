@@ -45,6 +45,11 @@ export const generateSidebar = (options: {
    * @default Number.POSITIVE_INFINITY
    */
   depth?: number;
+  /**
+   * The ignore pattern for the files
+   * @default ["_*"]
+   */
+  ignore?: string[];
 }): DefaultTheme.SidebarItem[] => {
   const {
     rootPath,
@@ -54,6 +59,7 @@ export const generateSidebar = (options: {
     transformPath = (path, name) => join(path, name),
     leafFile = "index",
     depth = Number.POSITIVE_INFINITY,
+    ignore = ["_*"],
   } = options;
 
   const normalizedContentPath = withoutLeadingAndTrailingSlash(contentPath);
@@ -65,6 +71,7 @@ export const generateSidebar = (options: {
       deep: depth,
       objectMode: true,
       baseNameMatch: true,
+      ignore,
     })
     .map((val) => ({
       name: val.name.replace(".md", ""),
@@ -81,9 +88,7 @@ export const generateSidebar = (options: {
 
   const filesRemap: DefaultTheme.SidebarItem[] = files.map(({ name, path }) => {
     const parentPath = path.split(sep);
-    const parentName =
-      parentPath.at(-1) ||
-      capitalize(withoutLeadingAndTrailingSlash(leadingPath));
+    const parentName = parentPath.at(-1) as string;
 
     const transformNormalizedName = (name: string) => {
       const normalizedName = name.replace(/^\d+\./g, "").trim();
@@ -137,11 +142,7 @@ export const generateSidebar = (options: {
       }
     }
 
-    if (current) {
-      current.push(tmpFile);
-    } else {
-      sidebar.push(tmpFile);
-    }
+    current.push(tmpFile);
   }
 
   return sidebar;
