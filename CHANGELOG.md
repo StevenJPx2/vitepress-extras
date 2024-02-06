@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.3
+
+[compare changes](https://github.com/StevenJPx2/vitepress-extras/compare/v0.1.2...v0.1.3)
+
+### 🚀 Enhancements
+
+- **generateSidebar:** Add ignore pattern ([f23666e](https://github.com/StevenJPx2/vitepress-extras/commit/f23666e))
+
+### ❤️ Contributors
+
+- Steven John <stevenjpx2@gmail.com>
+
 ## v0.1.2
 
 [compare changes](https://github.com/StevenJPx2/vitepress-extras/compare/v0.1.1...v0.1.2)
