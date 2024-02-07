@@ -1,6 +1,5 @@
 import fs from "fast-glob";
 import { join, resolve, sep } from "pathe";
-import { capitalize } from "string-ts";
 import { withoutLeadingSlash, withoutTrailingSlash } from "ufo";
 import { type DefaultTheme } from "vitepress";
 
