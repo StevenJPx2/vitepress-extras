@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.4
+
+[compare changes](https://github.com/StevenJPx2/vitepress-extras/compare/v0.1.3...v0.1.4)
+
+### 🩹 Fixes
+
+- Remove number from links ([d932b30](https://github.com/StevenJPx2/vitepress-extras/commit/d932b30))
+
+### 🏡 Chore
+
+- **generate-sidebar:** Remove unsued imports ([d5875f8](https://github.com/StevenJPx2/vitepress-extras/commit/d5875f8))
+
+### ❤️ Contributors
+
+- Steven John <stevenjpx2@gmail.com>
+
 ## v0.1.3
 
 [compare changes](https://github.com/StevenJPx2/vitepress-extras/compare/v0.1.2...v0.1.3)
