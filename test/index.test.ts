@@ -13,11 +13,11 @@ describe("vitepress-extras", () => {
             items: [
               {
                 text: "get-started",
-                link: "docs-test/guide/1.get-started",
+                link: "docs-test/guide/get-started",
               },
               {
                 text: "development",
-                link: "docs-test/guide/2.development",
+                link: "docs-test/guide/development",
               },
               {
                 text: "README",
@@ -44,11 +44,11 @@ describe("vitepress-extras", () => {
             items: [
               {
                 text: "get-started",
-                link: "docs-test/guide/1.get-started",
+                link: "docs-test/guide/get-started",
               },
               {
                 text: "development",
-                link: "docs-test/guide/2.development",
+                link: "docs-test/guide/development",
               },
             ],
           },
@@ -70,11 +70,11 @@ describe("vitepress-extras", () => {
             items: [
               {
                 text: "get-started",
-                link: "root/docs-test/guide/1.get-started",
+                link: "root/docs-test/guide/get-started",
               },
               {
                 text: "development",
-                link: "root/docs-test/guide/2.development",
+                link: "root/docs-test/guide/development",
               },
               {
                 text: "README",
@@ -100,11 +100,11 @@ describe("vitepress-extras", () => {
         items: [
           {
             text: "get-started",
-            link: "docs-test/guide/1.get-started",
+            link: "docs-test/guide/get-started",
           },
           {
             text: "development",
-            link: "docs-test/guide/2.development",
+            link: "docs-test/guide/development",
           },
           {
             text: "README",
@@ -137,11 +137,11 @@ describe("vitepress-extras", () => {
             items: [
               {
                 text: "get-started",
-                link: "docs-test/guide/1.get-started",
+                link: "docs-test/guide/get-started",
               },
               {
                 text: "development",
-                link: "docs-test/guide/2.development",
+                link: "docs-test/guide/development",
               },
               {
                 text: "README",

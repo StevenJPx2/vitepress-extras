@@ -6,6 +6,8 @@ import { type DefaultTheme } from "vitepress";
 const withoutLeadingAndTrailingSlash = (path: string) =>
   withoutLeadingSlash(withoutTrailingSlash(path));
 
+const removeNumberPrefix = (name: string) => name.replace(/^\d+\./g, "").trim();
+
 /**
  * Generates a sidebar for vitepress based on the files in the rootPath
  */
@@ -55,7 +57,7 @@ export const generateSidebar = (options: {
     contentPath = ".",
     leadingPath = "",
     transformName = (val) => val,
-    transformPath = (path, name) => join(path, name),
+    transformPath = (path, name) => join(path, removeNumberPrefix(name)),
     leafFile = "index",
     depth = Number.POSITIVE_INFINITY,
     ignore = ["_*"],
@@ -91,7 +93,7 @@ export const generateSidebar = (options: {
 
     const transformNormalizedName = (name: string) => {
       const normalizedName = name.replace(/^\d+\./g, "").trim();
-      return transformName(normalizedName, path);
+      return transformName(removeNumberPrefix(normalizedName), path);
     };
 
     // TODO: refactor this to use a for loop
