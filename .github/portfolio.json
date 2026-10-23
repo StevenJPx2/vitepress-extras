@@ -1,0 +1,15 @@
+{
+  "name": "VitePress Extras",
+  "body": [
+    "A small **npm package** of helpers for **VitePress**. The README documents one function, **`generateSidebars`**, which builds the sidebar config for your docs.",
+    "Ships **ESM and CommonJS** builds and has a test suite."
+  ],
+  "areas": [
+    "developer-tools"
+  ],
+  "technologies": {
+    "add": [
+      "vitepress"
+    ]
+  }
+}
